@@ -18,9 +18,11 @@ if (!config.get('jwtPrivateKey')) {
   process.exit(1);
 }
 
-mongoose.connect(config.get('db'))
-    .then( () => console.log('connected to mongodb... '))
-    .catch( err => console.log('could not connect to mongoedb... '));
+const db = config.get('db');
+
+mongoose.connect(db)
+    .then( () => console.log(`connected to ${db}...` ))
+  .catch( err => console.log(`could not connect to ${db}... `));
 
 app.use(express.json());
 app.use(cors());
