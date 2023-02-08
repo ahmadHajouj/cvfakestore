@@ -10,6 +10,7 @@ const auth = require('./routes/auth');
 const home = require('./routes/home');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 if (!config.get('jwtPrivateKey')) {
