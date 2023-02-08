@@ -37,9 +37,9 @@ app.use('/api/home', home);
 
 app.use(express.static(path.join(__dirname, "/cvfakestore/build")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/cvfakestore/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/cvfakestore/build', 'index.html'));
+// });
 
 const port = process.env.PORT || 3500;
 app.listen(port, () => console.log(`Listening on port ${port}... `));
