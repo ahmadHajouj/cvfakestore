@@ -18,7 +18,7 @@ if (!config.get('jwtPrivateKey')) {
   process.exit(1);
 }
 
-mongoose.connect('mongodb://localhost/fakestore')
+mongoose.connect(config.get('db'))
     .then( () => console.log('connected to mongodb... '))
     .catch( err => console.log('could not connect to mongoedb... '));
 
