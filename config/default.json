@@ -1,0 +1,6 @@
+{
+  "jwtPrivateKey": "",
+  "db": "mongodb://localhost/fakestore",
+  "port":"3500"
+}
+
