@@ -1,6 +1,7 @@
 import React from 'react';
 import FeatureBlock from './Featureblock';
-import { useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
+// import {  Button, Form } from 'react-bootstrap';
 
 const ItemPage = () => {
     const location = useLocation();
@@ -34,8 +35,21 @@ const ItemPage = () => {
                           soluta autem consequatur distinctio nemo optio ratione, magni
                             , laudantium omnis placeat sapiente? Cumque
                                possimus dicta magnam.
-                               </p>                
+                </p>     
 
+                {/* <Form className='main-form' onSubmit='settings-form'>
+                    <Form.Control 
+                        className="mb-3 textbox-form" 
+                        as='taxtarea'
+                        placeholder="Name"
+                        name='name'
+                        value=""
+                        onChange="" 
+                    />
+                    <Button variant='success' type='submit' disabled=''>submit</Button>
+                </Form>
+
+                    <Button variant='success' type='submit'className='add-btn' disabled=''>add info</Button> */}
 
             </div>
         );

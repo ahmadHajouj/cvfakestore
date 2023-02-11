@@ -167,23 +167,21 @@
 /* Media */
 @media screen and (min-width:427px) {
     .for-big-screen{
-        visibility: visible;
+        display: block;
     }
     
     .for-small-screen{
         display: none;
-        visibility: hidden;;
     }
 }
     
 @media screen and (max-width: 426px) {
     .for-big-screen{
         display: none;
-        visibility: hidden;
     }
 
     .for-small-screen{
-        visibility: visible;
+        display: block;
         overflow: visible;
     }
 }
@@ -218,7 +216,8 @@
 
 @media screen and (max-width: 426px){
     .feature{
-        padding: 1rem;
+        display: inline;
+        padding: 1rem ;
     }
 }
 
@@ -400,3 +399,24 @@
     }
     
 }
+
+ /* Add New Info */
+
+ .add-btn{
+    opacity: .75;
+    z-index: 1;
+    position: fixed;
+    bottom: 2.5rem;
+    right:22.5rem;
+ }
+
+ .add-not-clicked{
+    display: none;
+ }
+
+ @media screen and (max-width: 426px){
+    .add-btn{
+        bottom: 1.5rem;
+        right: 1rem;
+    }
+ }

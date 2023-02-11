@@ -26,13 +26,14 @@ class MobileShop extends Component {
 
     
     async componentDidMount(){
-        const { data } = await getItem();
+        const { data:alldata } = await getItem();
         const  { data: alltypes}  = await getTypes();
         const types = [{ id: -1, name: 'All'}, ...alltypes];
+        const data = alldata.filter(i => !i.notForShop);
 
         //console.log( 'the data from db is ' + alltypes);
 
-        this.setState({ items: data, data : data , types })
+        this.setState({ items: data, data  , types })
     }
     
 
