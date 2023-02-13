@@ -1,56 +1,70 @@
 import React from 'react';
 import FeatureBlock from './Featureblock';
 import {  useLocation } from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap';
+import { addInfo, getOneItem } from '../service/itemService';
 // import {  Button, Form } from 'react-bootstrap';
+
 
 const ItemPage = () => {
     const location = useLocation();
+    const [infoClass, setInfoClass] = React.useState('grid grid--1x2 grid--1x1 add-not-clicked');
+    const [addInfoClass, setAddInfoClass] = React.useState('add-btn');
+    const [item, setItem] = React.useState(location.state.item );
+    const [value, setValue] =React.useState('');
     
-        return (
-            <div className='block'>
+    console.log(location.state.isAdmin)
+
+    async function handleAddInfo(e){
+        e.preventDefault()
+        await addInfo(item, {info:value});
+        const { data:newItem } = await getOneItem(item)
+
+
+        setInfoClass(infoClass === 'grid grid--1x2 grid--1x1 add-not-clicked' ? 'grid grid--1x2 grid--1x1' : 'grid grid--1x2 grid--1x1 add-not-clicked')
+        setAddInfoClass(addInfoClass === 'add-btn' ? 'add-btn add-btn-clicked' : 'add-btn');
+        setItem(newItem);
+        setValue('');
+        
+    }
+    
+    function handeleValueChange({target:input}){
+        setValue( input.value );
+    }
+
+    function info(){
+        try{
+            return [...item.info];
+        }catch{
+            return [];
+        }
+
+    }
+    
+    return (
+        <div className='block'>
 
                 <FeatureBlock.Item data={location.state.item}/>
-                <p>Lorem ipsum dolor sit amet consectetur,
-                     adipisicing elit. Aliquam suscipit, magni, 
-                     assumenda nisi unde vel nam voluptatem perferendis
-                      itaque eaque ab. Impedit minima aliquam consectetur eligendi
-                       et dolorum autem voluptatum explicabo voluptate cum dolor maiores
-                        unde molestiae, assumenda nulla? Earum corrupti eligendi optio, 
-                        repudiandae nesciunt fuga, delectus nihil modi a odio dolores
-                         blanditiis ipsam. Iste maiores perspiciatis deleniti dignissios. Voluptas natus odio harum, commodi,
-                          possimus voluptatum dolor est ipsam consequatur odit eligendi                     
-                 praesentium repellat dignissimos blanditiis. Aspernatur repellendus eos 
-                   aliquam eveniet dolores deserunt ex molestiae,
-                        illum nisi debitis facilis accusamus dolorem ullam 
-                        pariatur voluptate tempora cum sint commodi nobis animi
-                         tempore ab, saepe eum. Reprehenderit natus esse repudiandae
-                          voluptas. Nobis ut consectetur fugit! Cumque
-                           est sit voluptatum dolorem eligendi explicabo molestiae corporis, laboriosam assumenda tempora
-                            repellat atque, nemo unde sunt voluptatibus facilis quia! Dolores sit suscipit aspernatur atque
-                             delectus accusamus magni. Fuga dolorum, accusamus mollitia quidem in neque\
-                              inventore nam! Aliquid autem laboriosam natus maiores
-                              , impedit dicta voluptatibus velit alias
-                             magni neque officia ex laudantium inventore. Repellat, similique culpa vero pariatur excepturi praesentium
-                             maiores. A, ipsa! Alias voluptatibus aliquid asperiores itaque quod numquam voluptatum
-                          soluta autem consequatur distinctio nemo optio ratione, magni
-                            , laudantium omnis placeat sapiente? Cumque
-                               possimus dicta magnam.
-                </p>     
+                <div>{info().map(i => (<p key={i}>{i}</p>))}</div>     
 
-                {/* <Form className='main-form' onSubmit='settings-form'>
-                    <Form.Control 
-                        className="mb-3 textbox-form" 
-                        as='taxtarea'
-                        placeholder="Name"
-                        name='name'
-                        value=""
-                        onChange="" 
-                    />
-                    <Button variant='success' type='submit' disabled=''>submit</Button>
-                </Form>
-
-                    <Button variant='success' type='submit'className='add-btn' disabled=''>add info</Button> */}
-
+                {location.state.isAdmin && (<React.Fragment>
+                    <Form className={infoClass}
+                        onSubmit={handleAddInfo}
+                    >
+                        <Form.Control className='mb-3' type='text' placeholder='the new info' as='textarea'
+                            name='value' value={value} onChange={handeleValueChange}
+                        />
+                        <Button variant='success' onClick={handleAddInfo} className='btn-form'>submit</Button>
+                    </Form>
+                    <Button variant='success'
+                    onClick={async ()=>{
+                        setInfoClass(infoClass === 'grid grid--1x2 grid--1x1 add-not-clicked' ? 'grid grid--1x2 grid--1x1' : 'grid grid--1x2 grid--1x1 add-not-clicked')
+                        setAddInfoClass(addInfoClass === 'add-btn' ? 'add-btn add-btn-clicked' : 'add-btn');
+                        await addInfo(item,'hi');
+                    }}
+                    className={addInfoClass}
+                    >add info</Button>
+                </React.Fragment>)} 
             </div>
         );
     

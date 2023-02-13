@@ -13,6 +13,7 @@ import { CartContext } from '../contaxt/CartContext';
 import { getItem } from './../service/itemService';
 import { addToCart, getUserCart, removeFromCart } from './../service/cartsService';
 import { getCurrentUser } from '../service/authService';
+import { getUser } from '../service/userService';
 // import { addToCart, getFromCart } from './../service/cartService';
 
 class NavBar extends Component {
@@ -25,24 +26,29 @@ class NavBar extends Component {
             removeItem: this.removeItem,
             countTotal: this.countTotal,
             navElement: "me-auto nav-ele",
+            isAdmin: false
         }
         
         this.handleNavbar = this.handleNavbar.bind(this);
+        this.isAdmin = this.isAdmin.bind(this);
     }
 
      componentDidMount = async () => {
         let data = [...this.state.data]
         let cart = {...this.state.cart}
+        let isAdmin = this.state.isAdmin
         try{
             if(getCurrentUser()){
                 const {data:theCart} = await getUserCart({userId : getCurrentUser()._id})
+                const {data:user} = await getUser(getCurrentUser());
                 
                 cart = {...theCart};
                 data = [...theCart.cart];
+                isAdmin = user.isAdmin 
             }
         }catch{}
         
-        this.setState({ data, cart });
+        this.setState({ data, cart, isAdmin });
     }
 
     addItem = async (id) => {
@@ -105,6 +111,16 @@ class NavBar extends Component {
         this.setState( { navElement });
     }
 
+    isAdmin(){
+        const { user } = this.props
+        
+        try{
+            if(user.isAdmin) return true;
+        }catch (ex){
+            return false;
+        }
+        return false;
+    }
     render(){
         const { user } = this.props
         function isAdmin(){

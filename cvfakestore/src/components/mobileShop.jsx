@@ -72,6 +72,9 @@ class MobileShop extends Component {
                                                 description={item.description}
                                                 price={item.price}
                                                 rating={item.rating}
+                                                _id={item._id}
+                                                info={item.info}
+                                                item={item}
                                                 />
                                         </Col>))}
                                             <Col>

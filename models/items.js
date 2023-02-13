@@ -7,7 +7,8 @@ const schema = new mongoose.Schema({
     description: { type: String, maxlength: 300 },
     type: { type: String, minlength: 1, maxlength: 25 },
     pic: { type: String },
-    price:{ type: Number}
+    price:{ type: Number},
+    info:[String]
 })
 
 const Items = mongoose.model('Items', schema);

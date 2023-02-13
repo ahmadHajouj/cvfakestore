@@ -216,7 +216,7 @@
 
 @media screen and (max-width: 426px){
     .feature{
-        display: inline;
+        display: block;
         padding: 1rem ;
     }
 }
@@ -408,6 +408,10 @@
     position: fixed;
     bottom: 2.5rem;
     right:22.5rem;
+ }
+
+ .add-btn-clicked{
+    display: none;
  }
 
  .add-not-clicked{

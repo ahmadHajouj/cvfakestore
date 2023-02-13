@@ -42,4 +42,15 @@ const allItems =
     res.send(item);
    });
 
+   router.put('/:id', async (req, res) => {
+    const item = await Items.findByIdAndUpdate(req.params.id , 
+      {$addToSet: {
+      info: req.body.info
+  }});
+
+    if(!item) return res.status(404).send('The item with the given ID was not found.');
+
+    res.send(item);
+   })
+
    module.exports = router;

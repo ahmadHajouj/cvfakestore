@@ -12,7 +12,7 @@ function Item (props) {
 
     return (            
         <CartContext.Consumer>
-            {({  addItem }) => (
+            {({  addItem, isAdmin }) => (
                     <Card className='item-card'>
                     <Card.Img
                     as='div'
@@ -38,7 +38,7 @@ function Item (props) {
                                         className='card-btn'
                                         as={Link} 
                                         to='/itempage' 
-                                        state={{from: '/shop', item: props }}
+                                        state={{from: '/shop', item: props.item, isAdmin }}
                                         >Show
                                     </Button>
                                     :
@@ -54,7 +54,7 @@ function Item (props) {
                                         className='card-btn'
                                         as={Link} 
                                         to='/itempage' 
-                                        state={{from: '/shop', item: props }}
+                                        state={{from: '/shop', item: props.item, isAdmin }}
                                         >Show
                                     </Button>
                                     }
