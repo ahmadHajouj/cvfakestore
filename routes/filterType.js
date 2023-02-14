@@ -5,7 +5,7 @@ const router = express.Router();
 
 const schema = new mongoose.Schema({
     id:{ type: String, require: true },
-    name: { type: String, require: true, minlength: 1, maxlength: 10 }
+    name: { type: String, require: true, minlength: 1, maxlength: 25 }
 });
 
 const Types = mongoose.model('Types', schema);
