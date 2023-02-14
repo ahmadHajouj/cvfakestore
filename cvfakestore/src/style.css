@@ -320,7 +320,6 @@
 @media screen and (max-width: 768px){
    .item-card{
     height: 15.5rem;
-    width: 15rem;
    }
    .card-text{
     display: block;
