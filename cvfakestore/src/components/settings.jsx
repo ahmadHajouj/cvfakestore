@@ -71,7 +71,7 @@ class Settings extends Component {
 
     handeleItemChange( { currentTarget: input }){
         const item = { ...this.state.item };
-        if(!item.id) item.id = this.state.items.length;
+        if(!item.id) item.id = this.state.items.length -1;
         item[input.name] = input.value;
 
         let isNotItem = true;
