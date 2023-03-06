@@ -293,6 +293,8 @@
 }
 
 .card-text{
+    height: 4.5rem;
+    overflow: hidden;
     display: flexbox;
 }
 
